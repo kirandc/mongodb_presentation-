@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Using MongoDB to build more powerful solutions than MySQL (or any RDBMS)</title>
+    
+    <meta name="description" content="Using MongoDB design patterns to build more powerful solutions than MySQL (or any RDBMS)" />
+    <meta name="author" content="Bartek Szopka" />
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+
+    <link href="css/impress-demo.css" rel="stylesheet" />
+    
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+
+<body class="impress-not-supported">
+    <div id="impress">
+        <div id="bored" class="step slide" data-x="-1000" data-y="-1500">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <b><span style="margin-left:245px;margin-top:200px;font-size:40px;"> Using MongoDB </span></b>
+            <br>
+            <br>
+             <span style="margin-left:150px;">
+             <b>to build more powerful solutions than </b>
+             </span>
+            <br>
+            <br>
+            <b><span style="margin-left:200px;font-size:40px;">MySQL (or any RDBMS)</span></b>
+
+        </div>
+
+        <div class="step slide" data-x="0" data-y="-1500">
+            <b><span style="font-size:40px;"> Rails supported RDBMS Database</span></b>
+             <hr>
+             <br>
+            <ul style="list-style:disc">
+                <li> MySQL</li>
+                <br>
+                <li> SQLite</li>
+                <br>
+                <li> PostgreSQl</li>
+                <br>
+                <li> Oracle</li>
+                <br>
+                <li> etc..</li>
+            </ol>
+        </div>
+        
+        
+        <div class="step slide" data-x="1000" data-y="-1500">
+            <img src='nosql.png' height="106%">
+        </div>
+
+        <div class="step slide" data-x="2000" data-y="-1500">
+            <b><span style="font-size:40px;"> Rails supported NoSQL Database</span></b>
+             <hr>
+             <br>
+            <ul style="list-style:disc">
+                <li>MongoDB</li>
+                <br>
+                <li>CouchDB</li>
+                <br>
+                <li>Cassandra</li>
+                <br>
+                <li>Redis</li>
+                <br>
+                <li> etc..</li>
+            </ol>
+        </div>
+        
+        <div class="step slide" data-x="3000" data-y="-1500">
+            <b><span style="font-size:40px;">MongoDB </span></b>
+             <hr>
+             <br>
+             MongoDB is an open source <b>document-oriented database </b>system developed and supported by <b>10gen</b>.<br>
+             <br>It is part of the <b>NoSQL</b> family of database systems. <br><br>Instead of storing data in tables as is done in a "classical" relational database, MongoDB stores structured data as <b>JSON</b>-like documents with dynamic schemas (MongoDB calls the format BSON).
+             <br>
+        </div>
+        <div class="step slide" data-x="4000" data-y="-1500">
+            <b><span style="font-size:40px;">History</span></b>
+             <hr>
+             <br>
+            <ul style="list-style:disc">
+                <li>Development of MongoDB began at 10gen in 2007</li>
+                <br>
+                <li>In March 2010, from version 1.4, MongoDB has been considered production ready</li>
+                <br>
+                <li>The latest stable version, 2.2, was released in August 2012</li>
+                <br>
+                <li>Version 2.3 has released in Feb 2013, these versions of MongoDB are for testing only</li>
+                <br>
+            </ul>
+
+        </div>
+        
+        <div class="step slide" data-x="5000" data-y="-1500">
+            <b><span style="font-size:40px;"> Collection and Document</span></b>
+             <hr>
+             <span style="font-size:24px">
+                 An element of data is called a document, and documents are stored in collections. One collection may have any number of documents.
+             </span>
+             <br>
+             <span style="font-size:24px">
+                 <b>RDBMS Database.</b>
+             <br>
+             </span>
+            <img src='table.png' height="20%">
+             <br>
+             <span style="font-size:24px">
+                 <b>MongoDB collection</b>
+             <br>
+             </span>
+            <img src='collection.png' height="48%">
+        </div>
+
+        <div class="step slide" data-x="6000" data-y="-1500">
+            <b><span style="font-size:40px;"> Embedded documents</span></b>
+             <hr>
+             <br>
+             Embedded documents are good for fast queries. The embedded documents are also always available with the parent documents, without the need to run further queries to retrieve them.
+             <br>
+             <br>
+            <img src='embeds.png' height="48%" width="107%">
+        </div>
+        <div class="step slide" data-x="7000" data-y="-1500">
+            <b><span style="font-size:40px;"> Main features of MongoDB</span></b>
+             <hr>
+             <br>
+            <ul style="list-style:disc">
+                <li> Migrations are Dead </li>
+                <br>
+                <li> Array Keys </li>
+                <br>
+                  <pre>
+                   { 
+                     "_id": ObjectId("5088e157b1a5b634b6000058"),
+                     "roles": ['Admin','Manager', 'Accountant']
+                   }
+                   
+                   <b> Query: </b>
+
+                   db.users.find({roles: {$in: ['Manager']}})
+                  </pre>
+                <br>
+            </ul>
+        </div>
+        <div class="step slide" data-x="8000" data-y="-1500">
+            <b><span style="font-size:40px;"> Main features of MongoDB</span></b>
+             <hr>
+             <br>
+             <ul style="list-style:disc">
+                 <li> Hash Keys </li>
+                 <pre>
+                  { 
+                    "_id": ObjectId("5088e157b1a5b634b6000786"),
+                    "address": {'street_1' => 'A B C','street_2' => 'MG Road', 
+                                'city' => 'pune', 'state' => 'MH'}
+                  }
+
+                  <b> Query: </b>
+
+                  db.accounts.find({"address.street_1": 'A B C'})<br>
+                  db.accounts.find({"address.city": /^p/i})
+                 </pre>
+             </ul>
+        </div>
+        <div class="step slide" data-x="9000" data-y="-1500">
+            <b><span style="font-size:40px;"> Main features of MongoDB</span></b>
+             <hr>
+             <br>
+             <b>Map Reduce </b></br>
+             <br>
+                Map-reduce operations can handle complex aggregation tasks.
+             <br>
+             <br>
+             <b>High performance </b></br><br>
+                 <ul style="list-style:disc;margin-left:50px">
+                     <li>No joins and embedding makes reads and writes fast</li>
+                     <li>Indexes including indexing of keys from embedded documents and arrays</li>
+                 </ul>
+                 <br>
+                 <b>Horizontal scalability</b><br><br>
+                 <ul style="list-style:disc;margin-left:50px;">
+                     <li>Automatic sharding (auto-partitioning of data across servers)</li>
+                     </ul>
+
+        </div>
+
+        <div class="step slide" data-x="10000" data-y="-1500">
+            <b><span style="font-size:40px;"> Blog Application Using RDBMS</span></b>
+             <hr>
+             <br>
+            <img src='blog1.png' height="80%">
+        </div>
+        <div class="step slide" data-x="11000" data-y="-1500">
+            <b><span style="font-size:40px;"> Blog Application Using MongoDB</span></b>
+             <hr>
+             <br>
+            <img src='blog2.png' height="80%" style="margin-left:200px">
+        </div>
+        
+        
+        <div class="step slide" data-x="12000" data-y="-1500">
+            <b><span style="font-size:40px;"> Simple queries</span></b>
+             <hr>
+             Query : Lets say I want to get all the posts who have got the comment after 31st Dec 2012.
+             <br><br><b>
+                 SELECT `posts`.* from `posts` INNER JOIN `comments` ON `comments`.`post_id` = `post`.`id` where `comments`.`created_at` >= '2012-12-31 00:00:00'; </b><br><br>
+
+             Using MongoDB : Users embbeds many events<br><br>
+             <b>db.posts.find({'comments.created_at': { $gt : ISODate("2012-12-31T00:00:00.511Z")}})</b>
+        </div>
+        
+        
+        <div class="step slide" data-x="13000" data-y="-1500">
+            <b><span style="font-size:40px;"> Mongo Object Mappers for Ruby</span></b>
+             <hr>
+             <br>
+            <ul style="list-style:disc">
+                <li> MongoMapper</li>
+                <br>
+                <li> Mongoid</li>
+                <br>
+                <li> Mongo ODM</li>
+                <br>
+                <li> Mongo Model</li>
+            </ol>
+        </div>
+
+        <div class="step slide" data-x="14000" data-y="-1500">
+            <b><span style="font-size:40px;"> Why we choose Mongoid</span></b>
+            <hr>
+            <br>
+            <ul style="list-style:disc">
+                <li> Excellent documentation</li>
+                <br>
+                <li> Active community</li>
+                <br>
+                <li> Compatibility with other projects/gems</li>
+                <br>
+                <li> Similar API to ActiveRecord</li>
+                <br>
+                <li> Uses ActiveValidation</li>
+                <br>
+                <li> Mongoid Extras: Paranoid Documents, Versioning, Timestamping</li>
+            </ul>
+        </div>
+        
+        <div class="step slide" data-x="15000" data-y="-1500">
+            <b><span style="font-size:40px;"> Compatible Gems with Mongoid</span></b>
+            <hr>
+            <br>
+            <ul style="list-style:disc">
+                <li><b>Devise </b>- Authentication solution for Rails based on Warden. Supports Mongoid out of box</li>
+                <br>
+                <li><b>Carrierwave </b>- Simple and flexible way to upload files from Ruby Application.</li>
+                <br>
+                <li><b>Geocoder </b>- complete geocoding solution for Rails. Adds geocoding by street or IP address, reverse geocoding, and distance queries</li>
+                <br>
+
+                <li><b>Mongoid-rspec </b>- RSpec matchers and macros for Mongoid.</li>
+            </ul>
+        </div>
+        
+        <div class="step slide" data-x="16000" data-y="-1500">
+            <b><span style="font-size:40px;"> Getting Started</span></b>
+            <hr>
+            <br>
+            <ul style="list-style:disc">
+            <b>Include in Gem file</b><br><br>
+            gem "mongoid", "~> 3.0.21" <br>
+           <br> 
+            <b>Run the install for Mongoid </b> <br><br>
+            rails generate mongoid:config <br><br><br>
+
+            That's it!
+        </div>
+        <div class="step slide" data-x="17000" data-y="-1500">
+            <b><span style="font-size:40px;"> Development with MongoDb/Mongoid</span></b>
+            <hr>
+            <br>
+            <ul style="list-style:disc">
+                <li>Generating models is the same using console as with ActiveRecord.<br><br>
+                <b>rails generate model User name:string email:string role:array</b></li><br>
+                <li>No migration needed!</li><br>
+                <li>Take advantage of embedded documents in models where applicable for increased performance.</li><br>
+            </ul>
+        </div>
+        <div class="step slide" data-x="18000" data-y="-1500">
+            <b><span style="font-size:40px;"> Fields available for Mongoid</span></b>
+            <hr>
+            <br>
+            <ul style="list-style:disc">
+                <li>Array</li>
+                <li>BigDecimal (Stored as a String)</li>
+                <li>Boolean</li>
+                <li>Date</li>
+                <li>DateTime</li>
+                <li>Float</li>
+                <li>Hash</li>
+                <li>Integer</li>
+                <li>Range</li>
+                <li>String</li>
+                <li>Symbol</li>
+                <li>Time</li>
+            </ul>
+        </div>
+        
+        <div class="step slide" data-x="19000" data-y="-1500">
+            <b><span style="font-size:40px;"> Mongoid Document</span></b>
+            <hr>
+            <br>
+            <pre>
+              class User
+
+                 include Mongoid::Document
+                 include Mongoid::Timestamps
+                 
+                 field :name, type: String
+                 field :email, type: String
+                 field :role, type: Array
+
+                 validates :name, :email, :presence => true
+
+              end
+            </pre>
+            </div>
+
+        <div class="step slide" data-x="20000" data-y="-1500">
+            <b><span style="font-size:40px;"> Persisting in the Controller</span></b>
+            <hr>
+            <br>
+            <pre>
+              def create
+                 @user = User.new(params[:user])
+                 @user.save
+              end 
+
+              def update
+                 @user = User.find(params[:id])
+                 @user.update_attributes(params[:user])
+              end
+            </pre>
+        </div>
+
+        <div class="step slide" data-x="21000" data-y="-1500">
+            <b><span style="font-size:40px;"> Indexing</span></b>
+            <hr>
+            <br>
+            <pre>
+              class User
+                include Mongoid:Document
+
+                field :email, type: String
+
+                index({email: 1},{ unique: true})
+
+              end
+             </pre>
+             
+             <b>Indexing on multiple fields - </b> <br>
+
+             index({ email: 1, name: -1 }, { unique: true }) <br><br>
+
+              To create indexes in the database use the rake task <br>
+
+              <b>rake db:mongoid:create_indexes</b>
+        </div>
+
+        <div class="step slide" data-x="22000" data-y="-1500">
+            <b><span style="font-size:40px;"> Relations in Mongoid - Embedded</span></b>
+            <hr>
+            <br>
+            Embedded Relations - stored inside other documents in the database.
+            <br>
+            <br>
+            <pre>
+              class Blog
+                include Mongoid::Document
+                embeds_many :posts
+              end
+
+              class Post
+                include Mongoid::Document
+                embedded_in :blog
+              end
+           </pre>
+        </div>
+
+        <div class="step slide" data-x="23000" data-y="-1500">
+            <b><span style="font-size:40px;"> Embedded Posts</span></b>
+            <hr>
+            <br>
+            <pre>
+            { "_id": ObjectId("4e9ba47fcdffba523f000004"),
+
+              "name": "Joshsoftware Blog",
+
+              "posts": 
+                [
+                  {"content": "Presentation on MongoDB",
+
+                  "_id": ObjectId("4e9ba47fcdffba523f000005")}
+                ]
+            } 
+           </pre>
+        </div>
+        
+        <div class="step slide" data-x="24000" data-y="-1500">
+            <b><span style="font-size:40px;"> Polymorphic Behavior</span></b>
+            <hr>
+            <br>
+            <pre>
+              class Image
+                include Mongoid::Document
+                embeds_many :comments, as: :commentable
+              end
+
+              class Document
+                include Mongoid::Document
+                embeds_many :comments, as: :commentable
+              end
+
+              class Comment
+                include Mongoid::Document
+                embedded_in :commentable, polymorphic: true
+              end
+            </pre>
+        </div>
+        
+        <div class="step slide" data-x="25000" data-y="-1500">
+            <b><span style="font-size:40px;"> Relations in Mongoid - Referenced</span></b>
+            <hr>
+            <br>
+            Referenced Relations - stores reference to a document in another collection, typically an id <br><br>
+            <pre>
+              class Blog 
+                 include Mongoid::Document
+                 has_many :posts, dependent: :delete
+              end
+
+              class Post
+                 include Mongoid::Document
+                 belongs_to :blog
+              end
+           </pre>
+        </div>
+
+        <div class="step slide" data-x="26000" data-y="-1500">
+            <b><span style="font-size:40px;"> Many to Many Relationship</span></b>
+            <hr>
+            <br>
+            <pre>
+            class Tag
+               include Mongoid::Document
+               has_and_belongs_to_many :posts
+            end
+
+            class Post
+               include Mongoid::Document
+               has_and_belongs_to_many :tags
+            end
+           </pre>
+        </div>
+        
+        <div class="step slide" data-x="27000" data-y="-1500">
+            <b><span style="font-size:40px;"> Querying</span></b>
+            <hr>
+
+            Queries are type Criteria, which is a chainable and lazily evaluated wrapper to a MongoDB dynamic query. <br><br>
+
+            <b>Chainable queries include: <br></b>
+            <pre>
+            all_in                      all_of   
+            also_in                   and            
+            any_of                   asc            
+            desc                       distinct       
+            excludes               includes
+            limit                       near
+            not_in                    only
+            order_by               skip
+            where                    without
+            </pre>
+        </div>
+        
+        <div class="step slide" data-x="28000" data-y="-1500">
+            <b><span style="font-size:40px;"> Query Examples</span></b>
+            <hr>
+           <br>
+            User.find_or_create_by(name: 'kiran') <br><br>
+
+            User.where(name: 'kiran').destroy_all <br><br>
+
+            User.where(:age.gt => 18) <br><br>
+            
+            User.any_in(name: ['sandip', 'shailesh', 'ninad']) <br><br>
+
+            User.without(:first_name, :last_name) <br><br>
+
+            User.desc(:first_name, :last_name)<br><br>
+
+            User.near(:location => [30.983, 45.543]) <br><br>
+        </div>
+        
+        <div class="step slide" data-x="29000" data-y="-1500">
+            <b><span style="font-size:40px;"> Versioning with Mongoid</span></b>
+            <hr>
+            <br>
+            1. Embeds a version of the object on each save.<br><br>
+
+            2. Can skip versioning and also set the max versions. <br><br>
+
+            3. Add to model - <br><br>
+
+            <b>include Mongoid::Versioning</b>
+        </div>
+        
+        <div class="step slide" data-x="30000" data-y="-1500">
+            <b><span style="font-size:40px;"> Versioning Example</span></b>
+            <hr>
+            <pre>
+            { "_id": ObjectId("4e9ba47fcdffba523f000004"),
+               "name": "Joshsoftware Blog",
+               "created_at": ISODate("2011-10-17T03:58:53Z")
+               "updated_at": ISODate("2011-10-17T03:58:53Z")
+               "version": 3
+               "versions": [
+                 { "name": "Josh",
+                   "created_at": ISODate("2011-10-17T03:58:53Z")
+                   "version": 1
+                 },
+                 { "name": "Josh Software",
+                   "created_at": ISODate("2011-10-17T03:58:53Z")
+                   "version": 2
+                 },
+               ]
+            } 
+            </pre>
+        </div>
+        
+        <div class="step slide" data-x="31000" data-y="-1500">
+            <b><span style="font-size:40px;"> Drawbacks of MongoDB</span></b>
+            <hr>
+            <br>
+            <ul style="list-style:disc">
+                <li>Indexes take up a lot of RAM. They are B-tree indexes and if you have many, you can run out of system resources really fast.</li>
+                <br>
+                <li>Data size in MongoDB is typically higher due to e.g. each document has field names stored it</li>
+                <br>
+                <li>No support for transactions because only single-document operations are atomic with MongoDB. Only certain atomic operations are supported, at a single document level
+                </li><br>
+            </ul>
+        </div>
+
+        <div class="step slide" data-x="32000" data-y="-1500">
+            <b><span style="font-size:40px;"> Reference</span></b>
+            <hr>
+            <br>
+            http://www.10gen.com<br><br>
+            http://www.mongoid.org <br><br>
+            http://docs.mongodb.org/
+        </div>
+
+        <div class="step slide" data-x="33000" data-y="-1500">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <b><span style="margin-left:260px;margin-top:200px;font-size:40px;"> Thank You </span></b><br><br>
+            <b><span style="margin-left:309px;margin-top:200px;font-size:40px;"> Q&A </span></b>
+        </div>
+    </div>
+
+</div>
+
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+</body>
+</html>
