@@ -19,6 +19,16 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
+group :development do
+  gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
+  gem 'mysql2', '~> 0.3.7'
+
+end
+
+group :production do
+  gem 'thin'
+  gem 'pg'
+end
 
 gem 'jquery-rails'
 
